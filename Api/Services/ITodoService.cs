@@ -8,7 +8,7 @@ namespace Api.Services
         Todo GetTodoItem(int id);
         IReadOnlyList<Todo> GetAllTodos();
         Todo CreateTodo(Todo input);
-        Todo EditTodo(Todo input);
-        Todo DeleteTodo(Todo input);
+        Todo UpdateTodo(Todo input);
+        Todo DeleteTodo(int id);
     }
 }
