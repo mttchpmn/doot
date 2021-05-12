@@ -1,7 +1,10 @@
-﻿# TODO
+# TODO
 
 - Unit tests
 - Integration tests
-- Production deployment
 - Helper endpoints (todo/complete)
-- Auth0
+- Database migration script
+- Secure environment variables
+- Secure API with Auth0
+
+- Create CLI client
