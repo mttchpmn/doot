@@ -1,0 +1,7 @@
+﻿# TODO
+
+- Unit tests
+- Integration tests
+- Production deployment
+- Helper endpoints (todo/complete)
+- Auth0
