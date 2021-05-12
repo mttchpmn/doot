@@ -6,40 +6,57 @@ namespace Api.Services
 {
     public class TodoService : ITodoService
     {
-        private readonly PostgresContext _postgresContext;
+        private readonly PostgresContext _context;
 
-        public TodoService(PostgresContext postgresContext)
+        public TodoService(PostgresContext context)
         {
-            _postgresContext = postgresContext;
+            _context = context;
         }
-        public Todo GetTodoItem(int id)
+        public Todo GetTodo(int id)
         {
-            throw new System.NotImplementedException();
+            // TODO - Use async method
+            return _context.Todos.FirstOrDefault(x => x.Id == id);
         }
 
         public IReadOnlyList<Todo> GetAllTodos()
         {
             // TODO - Use async methods (ToListAsync())
-            return _postgresContext.Todos.ToList();
+            return _context.Todos.ToList();
         }
 
         public Todo CreateTodo(Todo input)
         {
             // TODO - Use async methods
-            _postgresContext.Todos.Add(input);
-            _postgresContext.SaveChanges();
+            _context.Todos.Add(input);
+            _context.SaveChanges();
 
             return input;
         }
 
         public Todo UpdateTodo(Todo input)
         {
-            throw new System.NotImplementedException();
+            // TODO - Use async methods
+            var todo = GetTodoById(input.Id);
+            todo.Title = input.Title;
+            todo.Description = input.Description;
+            todo.Completed = input.Completed;
+
+            _context.Todos.Add(todo);
+            _context.SaveChanges();
+
+            return todo;
         }
 
         public Todo DeleteTodo(int id)
         {
-            throw new System.NotImplementedException();
+            // TODO - Use async methods
+            var todo = GetTodoById(id);
+            _context.Todos.Remove(todo);
+            _context.SaveChanges();
+
+            return todo;
         }
+
+        private Todo GetTodoById(int id) => _context.Todos.FirstOrDefault(x => x.Id == id);
     }
 }

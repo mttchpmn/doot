@@ -19,7 +19,7 @@ namespace Api.Controllers
         [Route("{id:int}")]
         public IActionResult GetTodo(int id)
         {
-            var result = _todoService.GetTodoItem(id);
+            var result = _todoService.GetTodo(id);
             return Ok(result);
         }
 

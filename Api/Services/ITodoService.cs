@@ -5,7 +5,7 @@ namespace Api.Services
 {
     public interface ITodoService
     {
-        Todo GetTodoItem(int id);
+        Todo GetTodo(int id);
         IReadOnlyList<Todo> GetAllTodos();
         Todo CreateTodo(Todo input);
         Todo UpdateTodo(Todo input);
