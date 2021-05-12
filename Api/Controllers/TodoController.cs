@@ -45,6 +45,7 @@ namespace Api.Controllers
         }
 
         [HttpDelete]
+        [Route("{id:int}")]
         public IActionResult DeleteTodo(int id)
         {
             var result = _todoService.DeleteTodo(id);
