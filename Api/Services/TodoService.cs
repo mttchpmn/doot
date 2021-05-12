@@ -41,7 +41,7 @@ namespace Api.Services
             todo.Description = input.Description;
             todo.Completed = input.Completed;
 
-            _context.Todos.Add(todo);
+            _context.Todos.Update(todo);
             _context.SaveChanges();
 
             return todo;
