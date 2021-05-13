@@ -3,9 +3,10 @@ services:
   db:
     image: "postgres"
     networks:
-      - netwok
+      - doot
     environment:
       POSTGRES_DB: "doot"
+      # TODO - Use env variable      
       POSTGRES_PASSWORD: "postgres"
     volumes:
       - db_data:/var/lib/postgresql/data/
@@ -17,8 +18,9 @@ services:
       context: .
       dockerfile: Api/Dockerfile
     networks:
-      - netwok
+      - doot
     environment:
+      # TODO - Use env variable      
       LOCAL_DB_CONNECTION_STRING: "Server=db;Port=5432;Database=doot;User ID=postgres;Password=postgres"
     restart: on-failure
     ports:
@@ -26,8 +28,8 @@ services:
       - "5001:443"
 
 networks:
-  netwok:
-    name: my_network
+  doot:
+    name: doot_network
 
 volumes:
   db_data:

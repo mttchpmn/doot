@@ -5,8 +5,9 @@ services:
       context: .
       dockerfile: Database/Dockerfile
     networks: 
-      - woknet
+      - doot
     environment:
+      # TODO - Use env variable      
       LOCAL_DB_CONNECTION_STRING: "Server=db;Port=5432;Database=doot;User ID=postgres;Password=postgres"
     restart: on-failure
     ports:
@@ -14,9 +15,9 @@ services:
       - "5001:443"
 
 networks:
-  woknet:
+  doot:
     external:
-      name: my_network
+      name: doot_network
 
 volumes:
   db_data:
