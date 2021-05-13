@@ -1,4 +1,4 @@
-# TODO
+﻿# TODO
 
 - Unit tests
 - Integration tests
@@ -6,5 +6,6 @@
 - Database migration script
 - Secure environment variables
 - Secure API with Auth0
+- Update models and create DTOs
 
 - Create CLI client
