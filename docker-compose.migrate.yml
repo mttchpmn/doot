@@ -1,0 +1,22 @@
+﻿version: "3"
+services:
+  migrate:
+    build:
+      context: .
+      dockerfile: Database/Dockerfile
+    networks: 
+      - woknet
+    environment:
+      LOCAL_DB_CONNECTION_STRING: "Server=db;Port=5432;Database=doot;User ID=postgres;Password=postgres"
+    restart: on-failure
+    ports:
+      - "5000:80"
+      - "5001:443"
+
+networks:
+  woknet:
+    external:
+      name: my_network
+
+volumes:
+  db_data:
