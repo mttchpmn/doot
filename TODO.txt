@@ -3,8 +3,6 @@
 - Unit tests
 - Integration tests
 - Helper endpoints (todo/complete)
-- Database migration script
-- Secure environment variables
 - Secure API with Auth0
 - Update models and create DTOs
 

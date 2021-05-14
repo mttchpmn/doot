@@ -44,6 +44,14 @@ namespace Api.Controllers
             return Ok(result);
         }
 
+        [HttpPatch]
+        [Route("complete/{id:int}")]
+        public IActionResult CompleteTodo(int id)
+        {
+            var result = _todoService.CompleteTodo(id);
+            return Ok(result);
+        }
+
         [HttpDelete]
         [Route("{id:int}")]
         public IActionResult DeleteTodo(int id)

@@ -32,6 +32,17 @@ namespace Api.Services
 
             return input;
         }
+        
+        public Todo CompleteTodo(int id)
+        {
+            // TODO - Use async methods
+            var todo = GetTodoById(id);
+            todo.Completed = true;
+            _context.Todos.Update(todo);
+            _context.SaveChanges();
+
+            return todo;
+        }
 
         public Todo UpdateTodo(Todo input)
         {
