@@ -1,11 +1,14 @@
-﻿using Api.Models;
+﻿using System.Security.Claims;
+using Api.Models;
 using Api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class TodoController : ControllerBase
     {
         private readonly ITodoService _todoService;
@@ -59,5 +62,7 @@ namespace Api.Controllers
             var result = _todoService.DeleteTodo(id);
             return Ok(result);
         }
+
+        private string GetUserId() => this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
     }
 }
