@@ -43,7 +43,7 @@ docker-compose -f docker-compose.migrate.yml run migrate
 
 Teardown Architecture and DB
 ```shell
-docker-compose down --rmi --volumes
+docker-compose down --rmi all --volumes
 ```
 
 Launch Interactive Postgres Shell
