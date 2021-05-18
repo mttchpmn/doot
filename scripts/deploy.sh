@@ -2,7 +2,7 @@
 
 echo "Stashing changes..."
 
-git stash --force
+git stash
 
 echo "Pulling latest master..."
 
