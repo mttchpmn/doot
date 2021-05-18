@@ -29,6 +29,7 @@ namespace Api.Controllers
         [HttpGet]
         public IActionResult GetAllTodos()
         {
+            
             var result = _todoService.GetAllTodos(GetUserId());
             return Ok(result);
         }

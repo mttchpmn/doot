@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Api.Models;
 
@@ -24,7 +25,8 @@ namespace Api.Services
         public IReadOnlyList<GetTodoDto> GetAllTodos(string userId)
         {
             // TODO - Use async methods (ToListAsync())
-            var todos =  _context.Todos.ToList();
+            Console.WriteLine($"USER ID: {userId}");
+            var todos =  _context.Todos.Where(x => x.UserId == userId).ToList();
 
             return todos.Select(x => x.ToOutputDto()).ToList();
         }
