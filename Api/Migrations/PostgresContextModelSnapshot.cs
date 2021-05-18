@@ -38,6 +38,10 @@ namespace Api.Migrations
                         .HasColumnType("text")
                         .HasColumnName("title");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("text")
+                        .HasColumnName("user_id");
+
                     b.HasKey("Id")
                         .HasName("pk_todos");
 

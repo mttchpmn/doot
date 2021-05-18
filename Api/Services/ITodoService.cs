@@ -5,11 +5,11 @@ namespace Api.Services
 {
     public interface ITodoService
     {
-        Todo GetTodo(int id);
-        IReadOnlyList<Todo> GetAllTodos();
-        Todo CreateTodo(Todo input);
-        Todo UpdateTodo(Todo input);
-        Todo CompleteTodo(int id);
-        Todo DeleteTodo(int id);
+        GetTodoDto GetTodo(string userId, int id);
+        IReadOnlyList<GetTodoDto> GetAllTodos(string userId);
+        GetTodoDto CreateTodo(string userId, CreateTodoDto createTodo);
+        GetTodoDto UpdateTodo(string userId, UpdateTodoDto input);
+        GetTodoDto CompleteTodo(string userId, int id);
+        GetTodoDto DeleteTodo(string userId, int id);
     }
 }

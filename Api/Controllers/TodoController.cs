@@ -22,28 +22,28 @@ namespace Api.Controllers
         [Route("{id:int}")]
         public IActionResult GetTodo(int id)
         {
-            var result = _todoService.GetTodo(id);
+            var result = _todoService.GetTodo(GetUserId(), id);
             return Ok(result);
         }
 
         [HttpGet]
         public IActionResult GetAllTodos()
         {
-            var result = _todoService.GetAllTodos();
+            var result = _todoService.GetAllTodos(GetUserId());
             return Ok(result);
         }
 
         [HttpPost]
-        public IActionResult CreateTodo(Todo input)
+        public IActionResult CreateTodo(CreateTodoDto input)
         {
-            var result = _todoService.CreateTodo(input);
+            var result = _todoService.CreateTodo(GetUserId(), input);
             return Ok(result);
         }
 
         [HttpPut]
-        public IActionResult UpdateTodo(Todo input)
+        public IActionResult UpdateTodo(UpdateTodoDto input)
         {
-            var result = _todoService.UpdateTodo(input);
+            var result = _todoService.UpdateTodo(GetUserId(), input);
             return Ok(result);
         }
 
@@ -51,7 +51,7 @@ namespace Api.Controllers
         [Route("complete/{id:int}")]
         public IActionResult CompleteTodo(int id)
         {
-            var result = _todoService.CompleteTodo(id);
+            var result = _todoService.CompleteTodo(GetUserId(), id);
             return Ok(result);
         }
 
@@ -59,7 +59,7 @@ namespace Api.Controllers
         [Route("{id:int}")]
         public IActionResult DeleteTodo(int id)
         {
-            var result = _todoService.DeleteTodo(id);
+            var result = _todoService.DeleteTodo(GetUserId(), id);
             return Ok(result);
         }
 

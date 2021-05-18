@@ -12,42 +12,48 @@ namespace Api.Services
         {
             _context = context;
         }
-        public Todo GetTodo(int id)
+
+        public GetTodoDto GetTodo(string userId, int id)
         {
             // TODO - Use async method
-            return _context.Todos.FirstOrDefault(x => x.Id == id);
+            var todo = GetTodoById(userId, id);
+            
+            return todo.ToOutputDto();
         }
 
-        public IReadOnlyList<Todo> GetAllTodos()
+        public IReadOnlyList<GetTodoDto> GetAllTodos(string userId)
         {
             // TODO - Use async methods (ToListAsync())
-            return _context.Todos.ToList();
+            var todos =  _context.Todos.ToList();
+
+            return todos.Select(x => x.ToOutputDto()).ToList();
         }
 
-        public Todo CreateTodo(Todo input)
+        public GetTodoDto CreateTodo(string userId, CreateTodoDto createTodo)
         {
             // TODO - Use async methods
-            _context.Todos.Add(input);
+            var todo = createTodo.ToDatabaseTodo(userId);
+            _context.Todos.Add(todo);
             _context.SaveChanges();
 
-            return input;
+            return todo.ToOutputDto();
         }
-        
-        public Todo CompleteTodo(int id)
+
+        public GetTodoDto CompleteTodo(string userId, int id)
         {
             // TODO - Use async methods
-            var todo = GetTodoById(id);
+            var todo = GetTodoById(userId, id);
             todo.Completed = true;
             _context.Todos.Update(todo);
             _context.SaveChanges();
 
-            return todo;
+            return todo.ToOutputDto();
         }
 
-        public Todo UpdateTodo(Todo input)
+        public GetTodoDto UpdateTodo(string userId, UpdateTodoDto input)
         {
             // TODO - Use async methods
-            var todo = GetTodoById(input.Id);
+            var todo = GetTodoById(userId, input.Id);
             todo.Title = input.Title;
             todo.Description = input.Description;
             todo.Completed = input.Completed;
@@ -55,19 +61,19 @@ namespace Api.Services
             _context.Todos.Update(todo);
             _context.SaveChanges();
 
-            return todo;
+            return todo.ToOutputDto();
         }
 
-        public Todo DeleteTodo(int id)
+        public GetTodoDto DeleteTodo(string userId, int id)
         {
             // TODO - Use async methods
-            var todo = GetTodoById(id);
+            var todo = GetTodoById(userId, id);
             _context.Todos.Remove(todo);
             _context.SaveChanges();
 
-            return todo;
+            return todo.ToOutputDto();
         }
 
-        private Todo GetTodoById(int id) => _context.Todos.FirstOrDefault(x => x.Id == id);
+        private Todo GetTodoById(string userId, int id) => _context.Todos.FirstOrDefault(x => x.UserId == userId && x.Id == id);
     }
 }
