@@ -4,6 +4,10 @@ echo "Stashing changes..."
 
 git stash --force
 
+echo "Pulling latest master..."
+
+git pull
+
 echo "Deploying in PRODUCTION mode..."
 
 docker-compose up --build
