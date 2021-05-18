@@ -10,7 +10,7 @@ git pull
 
 echo "Deploying in PRODUCTION mode..."
 
-docker-compose up --build
+docker-compose up --detach --remove-orphans --build
 
 echo "Migrating DB..."
 
