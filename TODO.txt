@@ -2,7 +2,7 @@
 
 - Unit tests
 - Integration tests
-- Update models and create DTOs
+- Implement service response object
 - Send other HTTP responses for failure, not found etc...
 - Use Github actions to deploy (CI/CD)
 
