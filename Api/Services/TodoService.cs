@@ -14,34 +14,34 @@ namespace Api.Services
             _context = context;
         }
 
-        public GetTodoDto GetTodo(string userId, int id)
+        public ServiceResponse<GetTodoDto> GetTodo(string userId, int id)
         {
             // TODO - Use async method
             var todo = GetTodoById(userId, id);
-            
-            return todo.ToOutputDto();
+
+            return new ServiceResponse<GetTodoDto> {Data = todo.ToOutputDto(), Message = "Fetched TODO successfully"};
         }
 
-        public IReadOnlyList<GetTodoDto> GetAllTodos(string userId)
+        public ServiceResponse<IReadOnlyList<GetTodoDto>> GetAllTodos(string userId)
         {
             // TODO - Use async methods (ToListAsync())
-            Console.WriteLine($"USER ID: {userId}");
-            var todos =  _context.Todos.Where(x => x.UserId == userId).ToList();
+            var todos = _context.Todos.Where(x => x.UserId == userId).ToList();
+            var data = todos.Select(x => x.ToOutputDto()).ToList();
 
-            return todos.Select(x => x.ToOutputDto()).ToList();
+            return new ServiceResponse<IReadOnlyList<GetTodoDto>> {Data = data, Message = "Fetched TODOs successfully"};
         }
 
-        public GetTodoDto CreateTodo(string userId, CreateTodoDto createTodo)
+        public ServiceResponse<GetTodoDto> CreateTodo(string userId, CreateTodoDto createTodo)
         {
             // TODO - Use async methods
             var todo = createTodo.ToDatabaseTodo(userId);
             _context.Todos.Add(todo);
             _context.SaveChanges();
 
-            return todo.ToOutputDto();
+            return new ServiceResponse<GetTodoDto> {Data = todo.ToOutputDto(), Message = "Created TODO successfully"};
         }
 
-        public GetTodoDto CompleteTodo(string userId, int id)
+        public ServiceResponse<GetTodoDto> CompleteTodo(string userId, int id)
         {
             // TODO - Use async methods
             var todo = GetTodoById(userId, id);
@@ -49,10 +49,10 @@ namespace Api.Services
             _context.Todos.Update(todo);
             _context.SaveChanges();
 
-            return todo.ToOutputDto();
+            return new ServiceResponse<GetTodoDto> {Data = todo.ToOutputDto(), Message = "Completed TODO successfully"};
         }
 
-        public GetTodoDto UpdateTodo(string userId, UpdateTodoDto input)
+        public ServiceResponse<GetTodoDto> UpdateTodo(string userId, UpdateTodoDto input)
         {
             // TODO - Use async methods
             var todo = GetTodoById(userId, input.Id);
@@ -63,19 +63,22 @@ namespace Api.Services
             _context.Todos.Update(todo);
             _context.SaveChanges();
 
-            return todo.ToOutputDto();
+            return new ServiceResponse<GetTodoDto> {Data = todo.ToOutputDto(), Message = "Updated TODO successfully"};
         }
 
-        public GetTodoDto DeleteTodo(string userId, int id)
+        public ServiceResponse<GetTodoDto> DeleteTodo(string userId, int id)
         {
             // TODO - Use async methods
             var todo = GetTodoById(userId, id);
             _context.Todos.Remove(todo);
             _context.SaveChanges();
 
-            return todo.ToOutputDto();
+            return new ServiceResponse<GetTodoDto> {Data = todo.ToOutputDto(), Message = "Deleted TODO successfully"};
         }
 
-        private Todo GetTodoById(string userId, int id) => _context.Todos.FirstOrDefault(x => x.UserId == userId && x.Id == id);
+        private Todo GetTodoById(string userId, int id)
+        {
+            return _context.Todos.FirstOrDefault(x => x.UserId == userId && x.Id == id);
+        }
     }
 }
