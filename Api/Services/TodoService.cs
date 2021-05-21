@@ -19,6 +19,8 @@ namespace Api.Services
             // TODO - Use async method
             var todo = GetTodoById(userId, id);
 
+            if (todo == null) return new ServiceResponse<GetTodoDto> {Data = null, Successful = false, Message = "TODO not found for ID"};
+
             return new ServiceResponse<GetTodoDto> {Data = todo.ToOutputDto(), Message = "Fetched TODO successfully"};
         }
 
